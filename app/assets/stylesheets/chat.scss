@@ -1,0 +1,56 @@
+// Place all the styles related to the chat controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-end;
+}
+
+#chatbox {
+  height: 100%;
+  overflow-y: scroll;
+  padding: 10px;
+}
+
+.message {
+  background-color: #eee;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #0084ff;
+  color: white;
+}
+
+.bot {
+  align-self: flex-start;
+}
+
+form {
+  display: flex;
+  margin-top: 10px;
+}
+
+input[type="text"] {
+border-radius: 20px;
+border: none;
+flex: 1;
+font-size: 16px;
+padding: 10px;
+}
+
+input[type="submit"] {
+background-color: #0084ff;
+border: none;
+border-radius: 20px;
+color: white;
+font-size: 16px;
+margin-left: 10px;
+padding: 10px 20px;
+}

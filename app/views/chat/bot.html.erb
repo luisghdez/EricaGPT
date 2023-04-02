@@ -1,0 +1,12 @@
+<div id="chat-container">
+  <div id="chatbox">
+    <% @conversations.each do |conversation| %>
+      <div class="<%= conversation[:class] %> message"><%= conversation[:message] %></div>
+    <% end %>
+  </div>
+
+  <%= form_tag(chatbot_path, method: :post) do %>
+    <%= text_field_tag :user_input %>
+    <%= submit_tag "Send" %>
+  <% end %>
+</div>
