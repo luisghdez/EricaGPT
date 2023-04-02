@@ -1,6 +1,8 @@
 .chat-container {
-  max-width: 600px;
-  margin: 0 auto;
+  width: 95%;
+  max-height: 80vh;
+  margin-bottom: 16px;
+  overflow: scroll;
   font-family: Arial, sans-serif;
 }
 

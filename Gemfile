@@ -58,3 +58,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'openai', '~> 0.1.0'
 gem 'dotenv-rails'
 gem 'ruby-openai'
+gem 'activerecord-session_store'
