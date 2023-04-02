@@ -1,7 +1,17 @@
-<div id="chat-container">
-  <div id="chatbox">
-    <% @conversations.each do |conversation| %>
-      <div class="<%= conversation[:class] %> message"><%= conversation[:message] %></div>
+<div class='cont'>
+  <h1>Hello, I am Erica</h1>
+
+  <div class="chat-container">
+    <% session[:messages].each do |message| %>
+      <% if message[:user] %>
+        <div class="user-message">
+          <p><%= message[:user] %></p>
+        </div>
+      <% end %>
+
+      <div class="bot-message">
+        <p><%= message[:bot] %></p>
+      </div>
     <% end %>
   </div>
 
