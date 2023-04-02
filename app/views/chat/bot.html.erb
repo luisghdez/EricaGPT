@@ -2,7 +2,7 @@
   <h1>EricaGPT</h1>
 
   <div class="chat-container">
-    <% session[:messages].each do |message| %>
+    <% session[:messages].last(10).each do |message| %>
       <% if message[:user] %>
         <div class="user-message">
           <p><%= message[:user] %></p>
