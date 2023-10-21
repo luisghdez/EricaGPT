@@ -1,5 +1,5 @@
 <div class='cont'>
-  <h1>EricaGPT</h1>
+  <h1>PathBot</h1>
 
   <div class="chat-container">
     <% session[:messages].last(10).each do |message| %>
@@ -15,8 +15,10 @@
     <% end %>
   </div>
 
-  <%= form_tag(chatbot_path, method: :post) do %>
-    <%= text_field_tag :user_input %>
-    <%= submit_tag "Send" %>
-  <% end %>
+  <div class="input-container">
+    <%= form_tag(chatbot_path, method: :post) do %>
+      <%= text_field_tag :user_input, nil, placeholder: "Type a message..." %>
+      <%= submit_tag "Send" %>
+    <% end %>
+  </div>
 </div>

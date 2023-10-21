@@ -1,0 +1,8 @@
+// Append the user message to the chat container
+$(".chat-container").append('<div class="user-message"><p><%= j params[:user_input] %></p></div>');
+
+// Append the bot message to the chat container
+$(".chat-container").append('<div class="bot-message"><p><%= j session[:messages].last[:bot] %></p></div>');
+
+// Scroll to the bottom of the chat container
+$(".chat-container").scrollTop($(".chat-container")[0].scrollHeight);

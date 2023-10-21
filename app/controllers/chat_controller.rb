@@ -6,12 +6,11 @@ class ChatController < ApplicationController
 
     if params[:user_input].present?
       # User has submitted a message, generate a response from OpenAI
-      client = OpenAI::Client.new(access_token: "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")
+      client = OpenAI::Client.new(access_token: "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")
 
-      context = "YOUR NAME IS ERICA ACT AS MY FINANCIAL ADVISOR, AND FRIEND.
-
-      Help users reach their desired purchase goal efficiently and personally. Analyze their financial information and suggest a tailored savings plan. Consider factors like age, spending habits, and demographics when crafting your response.
-
+      context = "You are a financial advisor. Provide insightful and tailored advice based on a user's financial situation.
+      Consider factors like income, expenses, savings, age, and financial goals to craft your response.
+      Always prioritize the user's best financial interests and ensure safety and feasibility of suggestions.
       USER INPUTS:
 
       Name: Luis
@@ -20,17 +19,10 @@ class ChatController < ApplicationController
       Balance: $10,000
       Savings: $12,000
       Yearly Income: $100,000
-      Spending category (e.g., entertainment, grocery, web shopping)
-      OBJECTIVE:
-      Create a unique savings plan for each user to afford their desired item as quickly as possible. Calculate the daily or weekly savings required and estimate the time to reach the goal. Offer to set up a dedicated account for their savings.
-
-      RESPONSE FORMAT EXAMPLE:
-      ""[Name], by [adjusting spending/saving $X daily/weekly] for the next [Y months/weeks], you can afford your desired item without repercussions. Would you like to set up a '[Goal] Savings Account' and automatically transfer $X daily/weekly for the duration of the plan?""
-
-      Make sure to give personalized data, follow the response format example to the letter, but make sure to change it based on the different output.
       "
 
-      prompt = "#{context} #{params[:user_input]}"
+      prompt = "Using the following context:#{context} Answer the following question or input: #{params[:user_input]}.
+      Keep your response short and concise."
 
       response = client.chat(
         parameters: {
@@ -48,6 +40,9 @@ class ChatController < ApplicationController
       user_message = params[:user_input]
       bot_message = response.parsed_response['choices'][0]['message']['content']
       bot_message.gsub!(/[^a-zA-Z.\s]/, '')
+
+      @bot_response = bot_message
+
 
       session[:messages] << {user: user_message, bot: bot_message}
     else
