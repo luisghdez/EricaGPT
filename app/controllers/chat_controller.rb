@@ -5,24 +5,46 @@ class ChatController < ApplicationController
     session[:messages] ||= []
 
     if params[:user_input].present?
-      # User has submitted a message, generate a response from OpenAI
-      client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
+      client = OpenAI::Client.new(access_token: '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')
 
-      context = "You are a financial advisor. Provide insightful and tailored advice based on a user's financial situation.
-      Consider factors like income, expenses, savings, age, and financial goals to craft your response.
-      Always prioritize the user's best financial interests and ensure safety and feasibility of suggestions.
+      # Dynamic user data
+      user_data = {
+        name: "Luis",
+        age: 20,
+        average_spent_vs_deposit: "+200",
+        balance: "$10,000",
+        savings: "$12,000",
+        yearly_income: "$100,000"
+      }
+
+      context = "You are a financial advisor. Provide tailored advice based on a user's financial situation.
       USER INPUTS:
-
-      Name: Luis
-      Age: 20
-      Average spent vs deposit: +200
-      Balance: $10,000
-      Savings: $12,000
-      Yearly Income: $100,000
+      Name: #{user_data[:name]}
+      Age: #{user_data[:age]}
+      Average spent vs deposit: #{user_data[:average_spent_vs_deposit]}
+      Balance: #{user_data[:balance]}
+      Savings: #{user_data[:savings]}
+      Yearly Income: #{user_data[:yearly_income]}
       "
 
-      prompt = "Using the following context:#{context} Answer the following question or input: #{params[:user_input]}.
-      Keep your response short and concise. Tailor your response specifically to the user using their age, average spending and savings."
+      # Detect user's request type
+      request_type = if params[:user_input].include?("saving plan")
+                       "saving plan"
+                     elsif params[:user_input].include?("retirement plan")
+                       "retirement plan"
+                     elsif params[:user_input].include?("loan")
+                       "loan"
+                     elsif params[:user_input].include?("credit card")
+                       "credit card"
+                     elsif params[:user_input].include?("mortgage")
+                       "mortgage"
+                     elsif params[:user_input].include?("investment plan")
+                       "investment plan"
+                     else
+                       "general advice"
+                     end
+
+      prompt = "Using the following context:#{context} Answer the following question: #{params[:user_input]}. If the user requests a #{request_type}, calculate the amount for the userto save per month to reach their goal. Your response should include specific amounts of money and calculations."
 
       response = client.chat(
         parameters: {
@@ -34,15 +56,13 @@ class ChatController < ApplicationController
             }
           ],
           max_tokens: 150
-
         })
 
       user_message = params[:user_input]
       bot_message = response.parsed_response['choices'][0]['message']['content']
-      bot_message.gsub!(/[^a-zA-Z.\s]/, '')
+      # bot_message.gsub!(/[^a-zA-Z.\s]/, '')
 
       @bot_response = bot_message
-
 
       session[:messages] << {user: user_message, bot: bot_message}
     else
