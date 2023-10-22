@@ -1,4 +1,5 @@
 <div class='cont'>
+
   <h1>PathBot</h1>
 
   <div class="chat-container">
@@ -8,9 +9,11 @@
           <p><%= message[:user] %></p>
         </div>
       <% end %>
-
-      <div class="bot-message">
-        <p><%= message[:bot] %></p>
+      <div class="bot-response-div">
+        <div class="bot-icon"></div>
+        <div class="bot-message">
+          <p><%= message[:bot] %></p>
+        </div>
       </div>
     <% end %>
   </div>
@@ -18,7 +21,7 @@
   <div class="input-container">
     <%= form_tag(chatbot_path, method: :post) do %>
       <%= text_field_tag :user_input, nil, placeholder: "Type a message..." %>
-      <%= submit_tag "Send" %>
+      <%= submit_tag ">" %>
     <% end %>
   </div>
 </div>

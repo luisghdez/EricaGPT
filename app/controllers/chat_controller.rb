@@ -6,7 +6,7 @@ class ChatController < ApplicationController
 
     if params[:user_input].present?
       # User has submitted a message, generate a response from OpenAI
-      client = OpenAI::Client.new(access_token: "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")
+      client = OpenAI::Client.new(access_token: ENV['OPENAI_ACCESS_TOKEN'])
 
       context = "You are a financial advisor. Provide insightful and tailored advice based on a user's financial situation.
       Consider factors like income, expenses, savings, age, and financial goals to craft your response.
@@ -22,7 +22,7 @@ class ChatController < ApplicationController
       "
 
       prompt = "Using the following context:#{context} Answer the following question or input: #{params[:user_input]}.
-      Keep your response short and concise."
+      Keep your response short and concise. Tailor your response specifically to the user using their age, average spending and savings."
 
       response = client.chat(
         parameters: {

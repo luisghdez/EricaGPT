@@ -1,21 +1,26 @@
+body {
+  background-color: #0a2840;
+}
+
 .chat-container {
   max-height: 85vh;
   margin-bottom: 16px;
   overflow-y: scroll;
-  font-family: Arial, sans-serif;
+  font-family: 'Open Sans';
   display: flex;
   flex-direction: column;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+  // border: 1px solid #ccc;
+  border-radius: 0 0 10px 10px;
   padding: 20px;
   width: 100%;
+  font-size: 18px;
+  background-color: white;
 }
 
 .user-message,
 .bot-message {
   margin-bottom: 10px;
   padding: 10px;
-  border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Adds a slight shadow for depth */
 }
 
@@ -25,6 +30,7 @@
   width: fit-content;
   min-width: 20%;
   align-self: flex-end;
+  border-radius: 10px 10px 0px 10px;
 }
 
 .user-message p,
@@ -34,12 +40,13 @@
 }
 
 .bot-message {
-  background-color: #3353bd;
+  background-color: #0a2840;
   margin-right: 20%;
   color: white;
   width: fit-content;
   min-width: 20%;
   align-self: flex-start;
+  border-radius: 10px 10px 10px 0px;
 }
 
 .cont {
@@ -49,6 +56,18 @@
   align-items: center;
   width: 80%;
   margin: auto;
+  padding-top: 30px;
+}
+
+.cont h1 {
+  width: 100%;
+  padding: 10px 20px 10px 20px;
+  margin: 0;
+  text-align: center;
+  background-color: #8080806e;
+  border-radius: 10px 10px 0 0;
+  color: white;
+  font-weight: 100;
 }
 
 input[type="text"] {
@@ -61,7 +80,7 @@ input[type="text"] {
 
 input[type="submit"] {
   padding: 8px 16px;
-  background-color: #3353bd;
+  background-color: #0a2840;
   color: white;
   border: none;
   border-radius: 0px 5px 5px 0px;
@@ -86,4 +105,21 @@ body {
 
 .input-container {
   display: contents;
+}
+
+.bot-icon {
+  height: 25px;
+    width: 25px;
+    background-color: #28c3b3;
+    border-radius: 25px;
+    align-self: flex-end;
+    margin-right: 8px;
+}
+
+.bot-response-div {
+  display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
 }
